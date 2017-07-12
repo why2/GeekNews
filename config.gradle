@@ -2,7 +2,7 @@ ext {
 
     android = [
             compileSdkVersion : 25,
-            buildToolsVersion : '25.0.2',
+            buildToolsVersion : '25.0.1',
             applicationId     : "com.codeest.geeknews",
             minSdkVersion     : 21,
             targetSdkVersion  : 25,
@@ -11,7 +11,7 @@ ext {
     ]
 
     def dependVersion = [
-            support     : "25.1.0",
+            support     : "25.0.1",
             retrofit    : "2.2.0",
             okhttp      : "3.6.0",
             dagger2     : "2.0.2",

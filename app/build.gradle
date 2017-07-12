@@ -17,8 +17,10 @@ android {
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
 
+        //armeabi(split同样不支持
+        // )默认不加打包，如果只支持指定abi，可以选择配置ndk或者是split(universalApk为true)加packagingOptions的exclude
         ndk {
-            abiFilters "armeabi"
+            abiFilters 'arm64-v8a', 'armeabi-v7a'
         }
     }
 
@@ -27,7 +29,6 @@ android {
             minifyEnabled false
 //            shrinkResources true
 //            zipAlignEnabled true
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,27 +39,30 @@ android {
         }
     }
 
-    packagingOptions {
+    //打包时的额外操作（以下：当打包所有类型abi的时候，排除指定abi类型下的指定so包）
+   /* packagingOptions {
         exclude "lib/mips/librealm-jni.so"
         exclude "lib/x86/librealm-jni.so"
         exclude "lib/x86_64/librealm-jni.so"
-    }
+    }*/
 
-    splits {
+   /* splits {
         abi {
             enable true
             reset()
-            include 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            //支持单个abi的apk（可以不配置）
+            include 'arm64-v8a', 'armeabi-v7a'
+            //universalApk -true 同时打包一个包含所有类型的abi的apk
             universalApk true
         }
-    }
+    }*/
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support:support-annotations:25.1.0'
+    androidTestCompile 'com.android.support:support-annotations:25.0.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
 
@@ -86,7 +90,6 @@ dependencies {
     compile rootProject.ext.dependencies["retrofit"]
     compile rootProject.ext.dependencies["retrofit-converter-gson"]
     compile rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    compile rootProject.ext.dependencies["okhttp"]
     compile rootProject.ext.dependencies["okhttp-logging-interceptor"]
     compile rootProject.ext.dependencies["glide"]
     compile rootProject.ext.dependencies["glide-okhttp3-integration"]
