@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by codeest on 17/1/2.
+ * RecyclerView 的DiffUtil使用
  */
 
 public class ZhihuDiffCallback extends DiffUtil.Callback{

@@ -92,7 +92,7 @@ public class SectionActivity extends RootActivity<SectionChildPresenter> impleme
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(sectionChildListBean.getStories());
         mAdapter.notifyDataSetChanged();

@@ -106,7 +106,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
         if (swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();

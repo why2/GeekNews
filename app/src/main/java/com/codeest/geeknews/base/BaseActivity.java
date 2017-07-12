@@ -79,7 +79,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     }
 
     @Override
-    public void stateMain() {
+    public void showComment() {
 
     }
 

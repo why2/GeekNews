@@ -1,14 +1,16 @@
 package com.codeest.geeknews.widget;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
  * Created by codeest on 16/8/13.
+ * 没有用！！
  */
 
-public class SquareImageView extends ImageView {
+public class SquareImageView extends AppCompatImageView {
 
     public SquareImageView(Context context) {
         super(context);

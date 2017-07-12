@@ -69,7 +69,7 @@ public class SectionFragment extends RootFragment<SectionPresenter> implements S
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(sectionListBean.getData());
         mAdapter.notifyDataSetChanged();

@@ -134,7 +134,7 @@ public class TechFragment extends RootFragment<TechPresenter> implements TechCon
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
@@ -142,7 +142,7 @@ public class TechFragment extends RootFragment<TechPresenter> implements TechCon
 
     @Override
     public void showMoreContent(List<GankItemBean> list) {
-        stateMain();
+        showComment();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         isLoadingMore = false;

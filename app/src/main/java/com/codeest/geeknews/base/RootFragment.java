@@ -79,7 +79,7 @@ public abstract class RootFragment<T extends BasePresenter> extends BaseFragment
     }
 
     @Override
-    public void stateMain() {
+    public void showComment() {
         if (currentState == STATE_MAIN)
             return;
         hideCurrentView();

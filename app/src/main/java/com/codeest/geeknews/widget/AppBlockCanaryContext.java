@@ -8,9 +8,10 @@ import java.util.List;
 
 /**
  * Created by codeest on 2016/9/6.
+ * 耗时检测
  */
 public class AppBlockCanaryContext extends BlockCanaryContext {
-
+    
     /**
      * Implement in your project.
      *
@@ -19,7 +20,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public String provideQualifier() {
         return "unknown";
     }
-
+    
     /**
      * Implement in your project.
      *
@@ -28,7 +29,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public String provideUid() {
         return "uid";
     }
-
+    
     /**
      * Network type
      *
@@ -37,7 +38,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public String provideNetworkType() {
         return "unknown";
     }
-
+    
     /**
      * Config monitor duration, after this time BlockCanary will stop, use
      * with {@code BlockCanary}'s isMonitorDurationEnd
@@ -47,7 +48,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public int provideMonitorDuration() {
         return -1;
     }
-
+    
     /**
      * Config block threshold (in millis), dispatch over this duration is regarded as a BLOCK. You may set it
      * from performance of device.
@@ -57,7 +58,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public int provideBlockThreshold() {
         return 1000;
     }
-
+    
     /**
      * Thread stack dump interval, use when block happens, BlockCanary will dump on main thread
      * stack according to current sample cycle.
@@ -71,7 +72,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public int provideDumpInterval() {
         return provideBlockThreshold();
     }
-
+    
     /**
      * Path to save log, like "/blockcanary/", will save to sdcard if can.
      *
@@ -80,7 +81,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public String providePath() {
         return "/blockcanary/";
     }
-
+    
     /**
      * If need notification to notice block.
      *
@@ -89,7 +90,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public boolean displayNotification() {
         return true;
     }
-
+    
     /**
      * Implement in your project, bundle files into a zip file.
      *
@@ -100,7 +101,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public boolean zip(File[] src, File dest) {
         return false;
     }
-
+    
     /**
      * Implement in your project, bundled log files.
      *
@@ -109,8 +110,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public void upload(File zippedFile) {
         throw new UnsupportedOperationException();
     }
-
-
+    
     /**
      * Packages that developer concern, by default it uses process name,
      * put high priority one in pre-order.
@@ -120,7 +120,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public List<String> concernPackages() {
         return null;
     }
-
+    
     /**
      * Filter stack without any in concern package, used with @{code concernPackages}.
      *
@@ -129,7 +129,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
     public boolean filterNonConcernStack() {
         return false;
     }
-
+    
     /**
      * Provide white list, entry in white list will not be shown in ui list.
      *
@@ -140,7 +140,7 @@ public class AppBlockCanaryContext extends BlockCanaryContext {
         whiteList.add("org.chromium");
         return whiteList;
     }
-
+    
     /**
      * Whether to delete files whose stack is in white list, used with white-list.
      *

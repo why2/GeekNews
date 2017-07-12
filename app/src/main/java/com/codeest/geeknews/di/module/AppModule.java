@@ -8,9 +8,7 @@ import com.codeest.geeknews.model.http.HttpHelper;
 import com.codeest.geeknews.model.http.RetrofitHelper;
 import com.codeest.geeknews.model.prefs.ImplPreferencesHelper;
 import com.codeest.geeknews.model.prefs.PreferencesHelper;
-
 import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 

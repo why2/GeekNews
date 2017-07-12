@@ -41,6 +41,7 @@ public abstract class RootActivity<T extends BasePresenter> extends BaseActivity
                     "view_main's ParentView should be a ViewGroup.");
         }
         mParent = (ViewGroup) viewMain.getParent();
+        //此处用的不错，直接将加载布局填充到原来的布局中
         View.inflate(mContext, R.layout.view_progress, mParent);
         viewLoading = mParent.findViewById(R.id.view_loading);
         ivLoading = (ProgressImageView) viewLoading.findViewById(R.id.iv_progress);
@@ -77,7 +78,7 @@ public abstract class RootActivity<T extends BasePresenter> extends BaseActivity
     }
 
     @Override
-    public void stateMain() {
+    public void showComment() {
         if (currentState == STATE_MAIN)
             return;
         hideCurrentView();

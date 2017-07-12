@@ -19,17 +19,12 @@ import java.io.File;
 
 /**
  * Created by codeest on 16/10/10.
+ * 下载更新服务
  */
 
 public class UpdateService extends Service {
     private BroadcastReceiver receiver;
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
+    
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         receiver = new BroadcastReceiver() {
@@ -48,11 +43,16 @@ public class UpdateService extends Service {
         startDownload();
         return Service.START_STICKY;
     }
-
+    
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+    
     private void startDownload() {
         DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(
-                Uri.parse(MyApis.APK_DOWNLOAD_URL));
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(MyApis.APK_DOWNLOAD_URL));
         request.setTitle("GeekNews");
         request.setDescription("新版本下载中");
         request.setMimeType("application/vnd.android.package-archive");

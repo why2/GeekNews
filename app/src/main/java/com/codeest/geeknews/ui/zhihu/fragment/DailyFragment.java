@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.codeest.geeknews.R;
@@ -123,7 +122,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList = info.getStories();
         currentDate = String.valueOf(Integer.valueOf(info.getDate()) + 1);
         mAdapter.addDailyDate(info);
@@ -141,7 +140,7 @@ public class DailyFragment extends RootFragment<DailyPresenter> implements Daily
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         isDataReady = false;
         mPresenter.stopInterval();
         mList = info.getStories();

@@ -88,7 +88,7 @@ public class HotFragment extends RootFragment<HotPresenter> implements HotContra
         if (swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         rvHotContent.setVisibility(View.VISIBLE);
         mList.clear();
         mList.addAll(hotListBean.getRecent());

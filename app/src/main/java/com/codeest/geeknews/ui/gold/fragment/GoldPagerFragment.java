@@ -94,7 +94,7 @@ public class GoldPagerFragment extends RootFragment<GoldPresenter> implements Go
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mAdapter.updateData(goldListBean);
         mAdapter.notifyDataSetChanged();
     }

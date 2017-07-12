@@ -75,7 +75,7 @@ public class VtexPagerFragment extends RootFragment<VtexPresenter> implements Vt
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mAdapter.updateData(mList);
     }
 }

@@ -72,7 +72,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     }
 
     @Override
-    public void stateMain() {
+    public void showComment() {
 
     }
 

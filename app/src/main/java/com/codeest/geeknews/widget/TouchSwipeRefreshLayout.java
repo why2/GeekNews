@@ -11,6 +11,7 @@ import android.view.MotionEvent;
  * deal with issue #68
  * a bug of RecyclerView
  * Ref: https://code.google.com/p/android/issues/detail?id=231717
+ * 当在刷新的时候拦截事件
  */
 
 public class TouchSwipeRefreshLayout extends SwipeRefreshLayout {

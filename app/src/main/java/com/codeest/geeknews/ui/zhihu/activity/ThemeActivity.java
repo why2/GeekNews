@@ -123,7 +123,7 @@ public class ThemeActivity extends RootActivity<ThemeChildPresenter> implements 
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         setToolBar(mToolBar,themeChildListBean.getName());
         mList.clear();
         mList.addAll(themeChildListBean.getStories());

@@ -159,7 +159,7 @@ public class ZhihuDetailActivity extends RootActivity<ZhihuDetailPresenter> impl
 
     @Override
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
-        stateMain();
+        showComment();
         imgUrl = zhihuDetailBean.getImage();
         shareUrl = zhihuDetailBean.getShare_url();
         if (isNotTransition) {

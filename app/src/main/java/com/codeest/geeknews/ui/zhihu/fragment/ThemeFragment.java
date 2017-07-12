@@ -72,7 +72,7 @@ public class ThemeFragment extends RootFragment<ThemePresenter> implements Theme
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(themeListBean.getOthers());
         mAdapter.notifyDataSetChanged();

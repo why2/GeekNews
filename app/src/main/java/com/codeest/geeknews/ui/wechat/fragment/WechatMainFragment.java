@@ -78,7 +78,7 @@ public class WechatMainFragment extends RootFragment<WechatPresenter> implements
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mList.clear();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
@@ -86,7 +86,7 @@ public class WechatMainFragment extends RootFragment<WechatPresenter> implements
 
     @Override
     public void showMoreContent(List<WXItemBean> list) {
-        stateMain();
+        showComment();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         isLoadingMore = false;

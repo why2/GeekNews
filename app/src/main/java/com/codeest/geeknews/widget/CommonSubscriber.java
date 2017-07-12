@@ -49,7 +49,7 @@ public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
         if (mView == null) {
             return;
         }
-        if (mErrorMsg != null && !TextUtils.isEmpty(mErrorMsg)) {
+        if (!TextUtils.isEmpty(mErrorMsg)) {
             mView.showErrorMsg(mErrorMsg);
         } else if (e instanceof ApiException) {
             mView.showErrorMsg(e.toString());

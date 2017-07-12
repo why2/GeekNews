@@ -77,7 +77,7 @@ public class NodeListActivity extends RootActivity<NodePresenter> implements Nod
         if(swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
         }
-        stateMain();
+        showComment();
         mAdapter.setContentData(mList);
     }
 

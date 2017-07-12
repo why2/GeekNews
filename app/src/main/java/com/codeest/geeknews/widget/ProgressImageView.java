@@ -8,6 +8,7 @@ import android.view.View;
 
 /**
  * Created by codeest on 16/9/27.
+ * 控制svg(logo)动画的播放
  */
 
 public class ProgressImageView extends AppCompatImageView{

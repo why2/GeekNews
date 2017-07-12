@@ -34,7 +34,7 @@ public class CommentPresenter extends RxPresenter<CommentContract.View> implemen
                 .subscribeWith(new CommonSubscriber<CommentBean>(mView) {
                     @Override
                     public void onNext(CommentBean commentBean) {
-                        mView.stateMain();
+                        mView.showComment();
                         mView.showContent(commentBean);
                     }
                 })
@@ -45,7 +45,7 @@ public class CommentPresenter extends RxPresenter<CommentContract.View> implemen
                 .subscribeWith(new CommonSubscriber<CommentBean>(mView) {
                     @Override
                     public void onNext(CommentBean commentBean) {
-                        mView.stateMain();
+                        mView.showComment();
                         mView.showContent(commentBean);
                     }
                 })
