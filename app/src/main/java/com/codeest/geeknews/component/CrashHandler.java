@@ -14,19 +14,18 @@ import java.io.Writer;
 
 /**
  * Created by codeest on 2016/8/3.
+ * 自己处理异常捕获
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
-
+    
     private static Thread.UncaughtExceptionHandler defaultHandler = null;
-
-    private Context context = null;
-
     private final String TAG = CrashHandler.class.getSimpleName();
-
+    private Context context = null;
+    
     public CrashHandler(Context context) {
         this.context = context;
     }
-
+    
     /**
      * 初始化,设置该CrashHandler为程序的默认处理器
      */
@@ -34,7 +33,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(crashHandler);
     }
-
+    
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         System.out.println(ex.toString());
@@ -46,7 +45,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         ToastUtil.shortShow("抱歉,程序发生异常即将退出");
         App.getInstance().exitApp();
     }
-
+    
     /**
      * 得到程序崩溃的详细信息
      */
@@ -57,7 +56,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         ex.printStackTrace(printWriter);
         return result.toString();
     }
-
+    
     /**
      * 收集程序崩溃的设备信息
      */

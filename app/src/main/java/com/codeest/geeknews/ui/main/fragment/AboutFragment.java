@@ -1,5 +1,7 @@
 package com.codeest.geeknews.ui.main.fragment;
 
+import android.support.design.widget.Snackbar;
+
 import com.codeest.geeknews.R;
 import com.codeest.geeknews.app.Constants;
 import com.codeest.geeknews.base.SimpleFragment;

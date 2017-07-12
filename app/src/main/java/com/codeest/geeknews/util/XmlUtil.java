@@ -5,6 +5,7 @@ import android.support.v4.util.ArrayMap;
 
 /**
  * Created by codeest on 16/12/30.
+ * 解析xml工具
  */
 
 public class XmlUtil {

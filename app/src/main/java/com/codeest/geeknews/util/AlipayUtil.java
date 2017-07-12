@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
 /**
  * Created by codeest on 16/10/17.
  * https://github.com/fython/AlipayZeroSdk/blob/master/library/src/main/java/moe/feng/alipay/zerosdk/AlipayZeroSdk.java
+ * 支付宝工具类
  */
 
 public class AlipayUtil {

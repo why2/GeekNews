@@ -1,8 +1,5 @@
 package com.codeest.geeknews.util;
 
-/**
- * Created by codeest on 2016/7/25.
- */
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -19,14 +16,16 @@ import android.widget.ImageView;
  * <p/>
  * Created on 16/7/20.
  * GitHub: https://github.com/XunMengWinter
+ * <p>
+ * 实现扩散过渡动画
  *
  * @author ice
  */
 public class CircularAnimUtil {
-
+    
     public static final long PERFECT_MILLS = 618;
     public static final int MINI_RADIUS = 0;
-
+    
     /**
      * 向四周伸张，直到完成显示。
      */
@@ -36,23 +35,19 @@ public class CircularAnimUtil {
             myView.setVisibility(View.VISIBLE);
             return;
         }
-
         int cx = (myView.getLeft() + myView.getRight()) / 2;
         int cy = (myView.getTop() + myView.getBottom()) / 2;
-
         int w = myView.getWidth();
         int h = myView.getHeight();
-
         // 勾股定理 & 进一法
         int finalRadius = (int) Math.sqrt(w * w + h * h) + 1;
-
         Animator anim =
                 ViewAnimationUtils.createCircularReveal(myView, cx, cy, startRadius, finalRadius);
         myView.setVisibility(View.VISIBLE);
         anim.setDuration(durationMills);
         anim.start();
     }
-
+    
     /**
      * 由满向中间收缩，直到隐藏。
      */
@@ -62,15 +57,12 @@ public class CircularAnimUtil {
             myView.setVisibility(View.INVISIBLE);
             return;
         }
-
         int cx = (myView.getLeft() + myView.getRight()) / 2;
         int cy = (myView.getTop() + myView.getBottom()) / 2;
         int w = myView.getWidth();
         int h = myView.getHeight();
-
         // 勾股定理 & 进一法
         int initialRadius = (int) Math.sqrt(w * w + h * h) + 1;
-
         Animator anim =
                 ViewAnimationUtils.createCircularReveal(myView, cx, cy, initialRadius, endRadius);
         anim.setDuration(durationMills);
@@ -81,24 +73,33 @@ public class CircularAnimUtil {
                 myView.setVisibility(View.INVISIBLE);
             }
         });
-
         anim.start();
     }
-
+    
     /**
+     * 5.0以上才有动画！！！！！（这里为什么要排除5.0以下的，没有测试机，先不管！）
      * 从指定View开始向四周伸张(伸张颜色或图片为colorOrImageRes), 然后进入另一个Activity,
      * 返回至 @thisActivity 后显示收缩动画。
+     *
+     * @param thisActivity    当前Activity
+     * @param intent
+     * @param requestCode     请求码
+     * @param bundle
+     * @param triggerView     目标view
+     * @param colorOrImageRes 颜色或者图片资源
+     * @param durationMills   动画时间
      */
     @SuppressLint("NewApi")
-    public static void startActivityForResult(
-            final Activity thisActivity, final Intent intent, final Integer requestCode, final Bundle bundle,
-            final View triggerView, int colorOrImageRes, long durationMills) {
-
+    public static void startActivityForResult(final Activity thisActivity, final Intent intent, final Integer requestCode, final Bundle bundle, final View triggerView, int colorOrImageRes, long durationMills) {
         if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
-            thisActivity.startActivity(intent);
+            if (requestCode == null)
+                thisActivity.startActivity(intent);
+            else if (bundle == null)
+                thisActivity.startActivityForResult(intent, requestCode);
+            else
+                thisActivity.startActivityForResult(intent, requestCode, bundle);
             return;
         }
-
         int[] location = new int[2];
         triggerView.getLocationInWindow(location);
         final int cx = location[0] + triggerView.getWidth() / 2;
@@ -110,15 +111,13 @@ public class CircularAnimUtil {
         int w = decorView.getWidth();
         int h = decorView.getHeight();
         decorView.addView(view, w, h);
-
         // 计算中心点至view边界的最大距离
         int maxW = Math.max(cx, w - cx);
         int maxH = Math.max(cy, h - cy);
-        final int finalRadius = (int) Math.sqrt(maxW * maxW + maxH * maxH) + 1;
-        Animator
-                anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+        final int finalRadius = (int) Math.sqrt(maxW * maxW + maxH * maxH) + 1; //计算所需最大半径
+        Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
         int maxRadius = (int) Math.sqrt(w * w + h * h) + 1;
-        // 若使用默认时长，则需要根据水波扩散的距离来计算实际时间
+        // 若使用默认时长，则需要根据水波扩散的距离来计算实际时间(这里不明白为什么设置了默认的时间，还去计算什么比例？不多此一举？)
         if (durationMills == PERFECT_MILLS) {
             // 算出实际边距与最大边距的比率
             double rate = 1d * finalRadius / maxRadius;
@@ -131,23 +130,19 @@ public class CircularAnimUtil {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-
                 if (requestCode == null)
                     thisActivity.startActivity(intent);
                 else if (bundle == null)
                     thisActivity.startActivityForResult(intent, requestCode);
                 else
                     thisActivity.startActivityForResult(intent, requestCode, bundle);
-
                 // 默认渐隐过渡动画.
                 thisActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-                // 默认显示返回至当前Activity的动画.
+                // 默认显示返回至当前Activity的动画
                 triggerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Animator anim =
-                                ViewAnimationUtils.createCircularReveal(view, cx, cy, finalRadius, 0);
+                        Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, finalRadius, 0);
                         anim.setDuration(finalDuration);
                         anim.addListener(new AnimatorListenerAdapter() {
                             @Override
@@ -163,7 +158,7 @@ public class CircularAnimUtil {
                         anim.start();
                     }
                 }, 1000);
-
+                
             }
         });
         anim.start();
@@ -171,33 +166,63 @@ public class CircularAnimUtil {
 
 
     /*下面的方法全是重载，用简化上面方法的构建*/
-
-
-    public static void startActivityForResult(
-            Activity thisActivity, Intent intent, Integer requestCode, View triggerView, int colorOrImageRes) {
+    
+    /**
+     * 有返回值的跳转
+     *
+     * @param thisActivity    当前Activity
+     * @param intent
+     * @param requestCode     请求码
+     * @param triggerView     目标view
+     * @param colorOrImageRes 颜色或者图片资源
+     */
+    public static void startActivityForResult(Activity thisActivity, Intent intent, Integer requestCode, View triggerView, int colorOrImageRes) {
         startActivityForResult(thisActivity, intent, requestCode, null, triggerView, colorOrImageRes, PERFECT_MILLS);
     }
-
-    public static void startActivity(
-            Activity thisActivity, Intent intent, View triggerView, int colorOrImageRes, long durationMills) {
+    
+    /**
+     * 有intent传递，自定义动画时间
+     *
+     * @param thisActivity    当前Activity
+     * @param intent
+     * @param triggerView     目标view
+     * @param colorOrImageRes 颜色或者图片资源
+     * @param durationMills   动画时间
+     */
+    public static void startActivity(Activity thisActivity, Intent intent, View triggerView, int colorOrImageRes, long durationMills) {
         startActivityForResult(thisActivity, intent, null, null, triggerView, colorOrImageRes, durationMills);
     }
-
-    public static void startActivity(
-            Activity thisActivity, Intent intent, View triggerView, int colorOrImageRes) {
+    
+    /**
+     * 有intent传递，默认动画时间
+     *
+     * @param thisActivity    当前Activity
+     * @param intent
+     * @param triggerView     目标view
+     * @param colorOrImageRes 颜色或者图片资源
+     */
+    public static void startActivity(Activity thisActivity, Intent intent, View triggerView, int colorOrImageRes) {
         startActivity(thisActivity, intent, triggerView, colorOrImageRes, PERFECT_MILLS);
     }
-
+    
+    /**
+     * 没有传递intent时跳转
+     *
+     * @param thisActivity    当前Activity
+     * @param targetClass     目标Activity
+     * @param triggerView     目标view
+     * @param colorOrImageRes 颜色或者图片资源
+     */
     public static void startActivity(Activity thisActivity, Class<?> targetClass, View triggerView, int colorOrImageRes) {
         startActivity(thisActivity, new Intent(thisActivity, targetClass), triggerView, colorOrImageRes, PERFECT_MILLS);
     }
-
+    
     public static void show(View myView) {
         show(myView, MINI_RADIUS, PERFECT_MILLS);
     }
-
+    
     public static void hide(View myView) {
         hide(myView, MINI_RADIUS, PERFECT_MILLS);
     }
-
+    
 }
